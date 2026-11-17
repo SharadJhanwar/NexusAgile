@@ -1,0 +1,12 @@
+# NexusAgile Cron Automation Examples
+# Adjust board IDs, sprint IDs, and project keys before use.
+# Commands default to dry-run. Add --apply only with an authorized --approved-by.
+
+# Monday morning: shape next sprint scope.
+0 9 * * 1 cd /opt/nexusagile && ./automation/nexusagile-shape-sprint.sh --board-id 1234 --project-key ENG >> /tmp/nexusagile-shape.log 2>&1
+
+# Weekday standup: create a short progress pulse.
+0 10 * * 1-5 cd /opt/nexusagile && ./automation/nexusagile-progress-pulse.sh --board-id 1234 --sprint-id 4567 >> /tmp/nexusagile-pulse.log 2>&1
+
+# Twice weekly: surface sprint delivery risk.
+0 16 * * 2,4 cd /opt/nexusagile && ./automation/nexusagile-surface-risk.sh --board-id 1234 --sprint-id 4567 >> /tmp/nexusagile-risk.log 2>&1

@@ -1,0 +1,105 @@
+# Copy this file to references/team-map.local.yaml and replace placeholders.
+
+board:
+  id: "1234"
+  project_keys:
+    - "ENG"
+
+defaults:
+  dry_run: true
+  backlog_jql: "project in (ENG) AND statusCategory != Done AND sprint is EMPTY ORDER BY priority DESC, created ASC"
+  active_sprint_jql: "project in (ENG) AND sprint in openSprints() ORDER BY Rank ASC"
+  fields: "summary,status,assignee,priority,components,labels,updated,created,duedate"
+  stale_after_days: 3
+  standup_lookback_days: 1
+  blocked_statuses:
+    - "Blocked"
+    - "On Hold"
+  active_statuses:
+    - "In Progress"
+    - "In Review"
+    - "Testing"
+  done_statuses:
+    - "Done"
+    - "Closed"
+    - "Resolved"
+
+approval:
+  assignee_change_requires_approval: true
+  allow_apply_without_approval: false
+  assigning_authorities:
+    - name: "Engineering Lead"
+      jira_assignee: "lead@example.com"
+      scope:
+        - "ENG"
+  audit_log: "automation/output/approvals.log"
+
+team:
+  - name: "Alex Chen"
+    jira_assignee: "alex.chen@example.com"
+    team: "Core Platform"
+    skills:
+      - "backend"
+      - "distributed-systems"
+      - "lead"
+    components:
+      - "API Gateway"
+      - "Auth Service"
+    labels:
+      - "backend"
+      - "core"
+    max_in_progress: 3
+    sprint_capacity_points: 15
+    backup_assignee: "sarah.connor@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+  - name: "Sarah Connor"
+    jira_assignee: "sarah.connor@example.com"
+    team: "Core Platform"
+    skills:
+      - "backend"
+      - "python"
+      - "database"
+    components:
+      - "Data Pipeline"
+      - "Storage Engine"
+    labels:
+      - "data"
+      - "infrastructure"
+    max_in_progress: 2
+    sprint_capacity_points: 10
+    backup_assignee: "jordan.lee@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+  - name: "Jordan Lee"
+    jira_assignee: "jordan.lee@example.com"
+    team: "Quality & Testing"
+    skills:
+      - "qa"
+      - "integration-testing"
+      - "ci-cd"
+    components:
+      - "Integration Tests"
+      - "E2E Framework"
+    labels:
+      - "qa"
+      - "testing"
+    max_in_progress: 2
+    sprint_capacity_points: 8
+    backup_assignee: "alex.chen@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+rules:
+  ownership_order:
+    - "component"
+    - "label"
+    - "skill"
+    - "history"
+  never_auto_assign_labels:
+    - "security"
+    - "architecture"
+    - "needs-manager-review"
+  cross_team_assignment_requires_approval: true

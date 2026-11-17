@@ -1,0 +1,13 @@
+interface:
+  display_name: "NexusAgile"
+  short_description: "Enterprise Agile sprint orchestration and delivery governance with approval gates"
+  default_prompt: "Use $nexusagile to shape sprint scope, triage queues, balance load, inspect sprint health, surface risks, create progress, standup, and retro summaries, and keep owner changes approval-gated."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "mcp-atlassian"
+      description: "Atlassian MCP tools for Jira and Confluence operations"
+
+policy:
+  allow_implicit_invocation: true
